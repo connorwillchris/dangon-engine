@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://c85b3r3xujhea"]
+
+[ext_resource type="PackedScene" uid="uid://bnavlu7hmqwvl" path="res://src/entities/player/player_3d.tscn" id="1_vxc2t"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pd7wy"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_pvuv6"]
+sky_material = SubResource("ProceduralSkyMaterial_pd7wy")
+
+[sub_resource type="Environment" id="Environment_45p0m"]
+background_mode = 2
+sky = SubResource("Sky_pvuv6")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_8rcu6"]
+size = Vector3(20, 1, 20)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_kukeo"]
+data = PackedVector3Array(-10, 0.5, 10, 10, 0.5, 10, -10, -0.5, 10, 10, 0.5, 10, 10, -0.5, 10, -10, -0.5, 10, 10, 0.5, -10, -10, 0.5, -10, 10, -0.5, -10, -10, 0.5, -10, -10, -0.5, -10, 10, -0.5, -10, 10, 0.5, 10, 10, 0.5, -10, 10, -0.5, 10, 10, 0.5, -10, 10, -0.5, -10, 10, -0.5, 10, -10, 0.5, -10, -10, 0.5, 10, -10, -0.5, -10, -10, 0.5, 10, -10, -0.5, 10, -10, -0.5, -10, 10, 0.5, 10, -10, 0.5, 10, 10, 0.5, -10, -10, 0.5, 10, -10, 0.5, -10, 10, 0.5, -10, -10, -0.5, 10, 10, -0.5, 10, -10, -0.5, -10, 10, -0.5, 10, 10, -0.5, -10, -10, -0.5, -10)
+
+[node name="TemplateLevel" type="Node3D"]
+
+[node name="Level" type="Node3D" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Level"]
+transform = Transform3D(0.517729, -0.809307, -0.277451, 0.744702, 0.266655, 0.611812, -0.421161, -0.523371, 0.740747, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Level"]
+environment = SubResource("Environment_45p0m")
+
+[node name="FloorStatic" type="MeshInstance3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("BoxMesh_8rcu6")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Level/FloorStatic"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/FloorStatic/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_kukeo")
+
+[node name="Entities" type="Node3D" parent="."]
+
+[node name="Player3D" parent="Entities" instance=ExtResource("1_vxc2t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
