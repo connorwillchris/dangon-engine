@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://cawplp32x7fyb"]
+
+[ext_resource type="Texture2D" uid="uid://kiagtolh5rwa" path="res://assets/sprites/characters/portraits/aoi_portrait.png" id="1_x3ysl"]
+
+[resource]
+atlas = ExtResource("1_x3ysl")
+region = Rect2(10, 10, 634, 559)
